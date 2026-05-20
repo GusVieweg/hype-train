@@ -1,0 +1,39 @@
+import { getYoutubeClient } from "./youtube-oauth.js";
+import fs from "fs";
+
+export async function uploadBanner() {
+  const youtube = getYoutubeClient();
+
+  const bannerUpload = await youtube.channelBanners.insert({
+    media: {
+      mimeType: "image/png",
+      body: fs.createReadStream("./banner.png"),
+    },
+  });
+
+  const uploadedBannerUrl = bannerUpload.data.url;
+  console.log(uploadedBannerUrl);
+
+  const current = await youtube.channels.list({
+    mine: true,
+    part: "brandingSettings",
+  });
+
+  const brandingSettings = current.data.items[0].brandingSettings;
+
+  brandingSettings.image = {
+    bannerExternalUrl: uploadedBannerUrl,
+  };
+
+  await youtube.channels.update({
+    part: "brandingSettings",
+    requestBody: {
+      id: process.env.CHANNEL_ID,
+      brandingSettings,
+    },
+  });
+
+  console.log("Banner updated!");
+
+  console.log("Banner updated!");
+}
