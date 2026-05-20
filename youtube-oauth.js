@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 import { google } from "googleapis";
 
 export function getYoutubeClient() {

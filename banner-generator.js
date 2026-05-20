@@ -46,8 +46,11 @@ import fetch from "node-fetch";
 import { getSubscriberCount } from "./get-subscribers.js";
 import { uploadBanner } from "./upload-banner.js";
 import { uploadBannerToSpaces } from "./spaces-uploader.js";
+import path from "path";
 
-registerFont("fonts/runescape_uf.ttf", {
+const fontPath = path.join(import.meta.dirname, 'fonts', 'runescape_uf.ttf');
+
+registerFont(fontPath, {
   family: "RuneScape",
 });
 
@@ -58,13 +61,13 @@ const ACCESS_TOKEN = process.env.YOUTUBE_KEY;
 async function drawBanner(subs) {
   let SUB_COUNT = subs;
 
-  let bg = await loadImage("images/space.png");
+  let bg = await loadImage(path.join(import.meta.dirname, "images", "space.png"));
   ctx.drawImage(bg, 0, 0);
 
-  let train = await loadImage("images/train.png");
+  let train = await loadImage(path.join(import.meta.dirname, "images", "train.png"));
   ctx.drawImage(train, 0, 0);
 
-  let splotch = await loadImage("images/blue-screen-31x43.png");
+  let splotch = await loadImage(path.join(import.meta.dirname, "images", "blue-screen-31x43.png"));
   let splotch_0_x = BANNER_WIDTH / 2 - TRAIN_WIDTH / 2;
   let splotch_0_y = BANNER_HEIGHT / 2 - TRAIN_HEIGHT / 2;
   let splotch_50_x = splotch_0_x + TRAIN_WIDTH - SPLOTCH_WIDTH;

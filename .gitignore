@@ -4,3 +4,4 @@ node_modules/
 yarn.lock
 banner.png
 shuffled.json
+package-lock.json
