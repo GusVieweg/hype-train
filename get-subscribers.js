@@ -8,12 +8,12 @@ export async function getSubscriberCount() {
     `https://www.googleapis.com/youtube/v3/channels` +
     `?part=statistics&id=${CHANNEL_ID}&key=${YOUTUBE_KEY}`;
 
-  console.log(url);
-
   const res = await fetch(url);
   const data = await res.json();
 
   const subs = data?.items?.[0]?.statistics?.subscriberCount;
+
+  console.log("Subscriber count pulled.");
 
   return Number(subs);
 }

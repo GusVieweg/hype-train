@@ -12,7 +12,7 @@ export async function uploadBanner() {
   });
 
   const uploadedBannerUrl = bannerUpload.data.url;
-  console.log(uploadedBannerUrl);
+  console.log("Uploaded to YouTube storage.");
 
   const current = await youtube.channels.list({
     mine: true,
@@ -32,8 +32,6 @@ export async function uploadBanner() {
       brandingSettings,
     },
   });
-
-  console.log("Banner updated!");
 
   console.log("Banner updated!");
 }

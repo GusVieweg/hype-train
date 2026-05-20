@@ -107,12 +107,7 @@ async function drawBanner(subs) {
   let out = fs.createWriteStream(`banner.png`);
   let stream = canvas.createPNGStream();
   stream.pipe(out);
-  out.on("finish", () => console.log("Image has been processed."));
-
-  //   out = fs.createWriteStream(`banner.png`);
-  //   stream = canvas.createPNGStream();
-  //   stream.pipe(out);
-  //   out.on("finish", () => console.log("Image has been processed."));
+  out.on("finish", () => console.log("Image processed."));
 
   return canvas.toBuffer("image/png");
 }
