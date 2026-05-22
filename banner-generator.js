@@ -72,17 +72,15 @@ async function drawBanner(subs) {
   let splotch_0_y = BANNER_HEIGHT / 2 - TRAIN_HEIGHT / 2;
   let splotch_50_x = splotch_0_x + TRAIN_WIDTH - SPLOTCH_WIDTH;
   let splotch_10_y = splotch_0_y + TRAIN_HEIGHT - SPLOTCH_HEIGHT;
-  ctx.drawImage(splotch, splotch_0_x, splotch_0_y);
-  ctx.drawImage(splotch, splotch_50_x, splotch_0_y);
-  ctx.drawImage(splotch, splotch_0_x, splotch_10_y);
-  ctx.drawImage(splotch, splotch_50_x, splotch_10_y);
-  for (let sub = 0; sub < 500 - SUB_COUNT; sub++) {
-    let coord = POPULATION_ORDER[sub];
-    let x = coord % 50;
-    let y = Math.floor(coord / 50);
-    let splotch_x = splotch_0_x + x * SPLOTCH_WIDTH;
-    let splotch_y = splotch_0_y + y * SPLOTCH_HEIGHT;
-    ctx.drawImage(splotch, splotch_x, splotch_y);
+  if(SUB_COUNT < 500) {
+    for (let sub = 0; sub < 500 - SUB_COUNT; sub++) {
+      let coord = POPULATION_ORDER[sub];
+      let x = coord % 50;
+      let y = Math.floor(coord / 50);
+      let splotch_x = splotch_0_x + x * SPLOTCH_WIDTH;
+      let splotch_y = splotch_0_y + y * SPLOTCH_HEIGHT;
+      ctx.drawImage(splotch, splotch_x, splotch_y);
+    }
   }
 
   // x% of Hype Train complete!
