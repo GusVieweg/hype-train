@@ -6,8 +6,8 @@ export async function uploadBanner() {
 
   const bannerUpload = await youtube.channelBanners.insert({
     media: {
-      mimeType: "image/png",
-      body: fs.createReadStream("./banner.png"),
+      mimeType: "image/jpeg",
+      body: fs.createReadStream("./banner.jpg"),
     },
   });
 

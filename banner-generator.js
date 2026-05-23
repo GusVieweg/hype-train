@@ -105,12 +105,15 @@ async function drawBanner(subs) {
   ctx.strokeText(message, splotch_0_x + 25, splotch_0_y + 130);
   ctx.fillText(message, splotch_0_x + 25, splotch_0_y + 130);
 
-  let out = fs.createWriteStream(`banner.png`);
-  let stream = canvas.createPNGStream();
-  stream.pipe(out);
-  out.on("finish", () => console.log("Image processed."));
+  await new Promise((resolve, reject) => {
+    let out = fs.createWriteStream(`banner.jpg`);
+    let stream = canvas.createJPEGStream({ quality: 0.85 });
+    stream.pipe(out);
+    out.on("finish", () => { console.log("Image processed."); resolve(); });
+    out.on("error", reject);
+  });
 
-  return canvas.toBuffer("image/png");
+  return canvas.toBuffer("image/jpeg", { quality: 0.85 });
 }
 
 async function updateBanner() {
